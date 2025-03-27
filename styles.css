@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 50px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#hidden-word {
+    font-size: 24px;
+    letter-spacing: 5px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#lives {
+    font-size: 18px;
+    color: red;
+}
+
+#guess-input {
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+    width: 50px;
+    margin-top: 10px;
+}
+
+#message {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+}
+
+#used-letters, #ai-used-letters {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+#player-letters span, #ai-letters span {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+#player-letters span.correct {
+    color: green;
+}
+
+#player-letters span.incorrect {
+    color: red;
+}
+
+#ai-letters span.correct {
+    color: green;
+}
+
+#ai-letters span.incorrect {
+    color: red;
+}

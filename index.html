@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Hangman Game</h1>
+    <p id="mode-select">
+        <button id="solo-btn">Solo Mode</button>
+        <button id="ai-btn">AI Duel Mode</button>
+    </p>
+    <p id="hidden-word"></p>
+    <p id="lives"></p>
+    <input type="text" id="guess-input" maxlength="1">
+    <p>Player's Guessed Letters: <span id="player-letters"></span></p>
+    <button id="guess-btn">Guess</button>
+    <p id="message"></p>
+
+    <!-- Added these lines to display guessed letters -->
+    <p>AI's Guessed Letters: <span id="ai-letters"></span></p>
+
+    <script src="script.js"></script>
+</body>
+</html>
