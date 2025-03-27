@@ -1,8 +1,12 @@
 let game;
 let aiGame;
 const aiLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const wordList = [
+    "JAVASCRIPT", "PYTHON", "TROJAN", "HORSE", "BETA", "PANTHER", "STARSHIP", 
+    "ENTERPRISE", "SUMMERTIME", "SOLIDER", "WINTER", "TECHNICAL", "SPECIAL", 
+    "HANGMAN", "ASSASSIN", "NECESSARY", "GOLIATH"
+];
 
-// Hangman Game Class
 class Hangman {
     constructor(word) {
         this.word = word.toUpperCase();
@@ -32,18 +36,18 @@ class Hangman {
     }
 }
 
-// Start Solo Mode
 function startSolo() {
-    game = new Hangman("JAVASCRIPT");
+    const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+    game = new Hangman(randomWord);
     updateUI();
     document.getElementById("message").textContent = "";
     document.getElementById("player-letters").innerHTML = "";
 }
 
-// Start AI Duel Mode
 function startAIDuel() {
-    game = new Hangman("DEVELOPER");
-    aiGame = new Hangman("PROGRAM");
+    const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+    game = new Hangman(randomWord);
+    aiGame = new Hangman(randomWord);
     updateUI();
     document.getElementById("message").textContent = "AI Duel Mode Started!";
     document.getElementById("player-letters").innerHTML = "";
@@ -51,10 +55,9 @@ function startAIDuel() {
     aiTurn();
 }
 
-// Make a guess
 function makeGuess() {
     const input = document.getElementById("guess-input");
-    const letter = input.value.trim();
+    const letter = input.value.trim().toUpperCase(); // Convert to uppercase
     if (letter) {
         game.guess(letter);
         input.value = "";
@@ -66,7 +69,6 @@ function makeGuess() {
     }
 }
 
-// AI Turn
 function aiTurn() {
     if (aiGame.isGameOver()) return;
     
@@ -81,40 +83,24 @@ function aiTurn() {
     checkGameOver();
 }
 
-// Update the game UI
 function updateUI() {
     document.getElementById("hidden-word").textContent = game.hiddenWord;
     document.getElementById("lives").textContent = `Lives: ${game.lives}`;
 }
 
-// Update used letters for both player and AI
 function updateUsedLetters(letter, isPlayer) {
     const span = document.createElement("span");
-    
-    // Check whether it's the player's guess or the AI's guess
-    const isCorrect = isPlayer ? game.word.includes(letter) : aiGame.word.includes(letter);
-    
-    // Set the color of the guessed letter based on whether it's correct
-    span.style.color = isCorrect ? "green" : "red";
     span.textContent = letter;
     
     if (isPlayer) {
+        span.style.color = game.word.includes(letter) ? "green" : "red";
         document.getElementById("player-letters").appendChild(span);
     } else {
+        span.style.color = aiGame.word.includes(letter) ? "green" : "red";
         document.getElementById("ai-letters").appendChild(span);
-    }
-
-    // Add space between the letters for better formatting
-    const space = document.createElement("span");
-    space.textContent = " ";
-    if (isPlayer) {
-        document.getElementById("player-letters").appendChild(space);
-    } else {
-        document.getElementById("ai-letters").appendChild(space);
     }
 }
 
-// Check if the game is over and display the appropriate message
 function checkGameOver() {
     if (game.isGameOver() || aiGame.isGameOver()) {
         if (game.lives > 0 && !game.hiddenWord.includes("_")) {
@@ -128,7 +114,6 @@ function checkGameOver() {
     }
 }
 
-// Event Listeners
 document.getElementById("solo-btn").addEventListener("click", startSolo);
 document.getElementById("ai-btn").addEventListener("click", startAIDuel);
 document.getElementById("guess-btn").addEventListener("click", makeGuess);
